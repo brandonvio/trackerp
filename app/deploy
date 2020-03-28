@@ -1,0 +1,6 @@
+#!/bin/bash
+echo ##################### Package
+npm run-script build
+
+echo ##################### Deploy
+aws s3 sync build/ s3://budget-tracker-litpro --acl public-read
