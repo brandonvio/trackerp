@@ -33,7 +33,7 @@ export const Purchase = ({ item, deletePurchase, editPurchase }) => {
               <td colSpan="2">
                 <Button
                   size="sm"
-                  color="primary"
+                  color="info"
                   onClick={() => {
                     editPurchase(item.sk);
                   }}
@@ -42,7 +42,7 @@ export const Purchase = ({ item, deletePurchase, editPurchase }) => {
                 </Button>
                 <Button
                   size="sm"
-                  color="warning"
+                  color="secondary"
                   onClick={() => {
                     deletePurchase(item.sk);
                   }}

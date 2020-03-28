@@ -7,9 +7,9 @@ export const Header = () => {
       <Container fluid>
         <h1 className="display-3">Purchase Tracker</h1>
         <p className="lead">
-          Purchase tracking application. Coding challenge for LiteracyPro.
+          Purchase tracking application.
           <br />
-          react + dotnetcore + efcore + sql server + docker
+          react + nodejs + lambda + dynamodb + api gateway + s3 + ioc with terraform
         </p>
       </Container>
     </Jumbotron>

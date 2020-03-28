@@ -153,7 +153,7 @@ export const PurchaseForm = ({ savePurchase, purchase, categories }) => {
               invalid={errors.memo && touched.memo}
             />
           </FormGroup>
-          <Button color="primary" type="submit">
+          <Button color="info" type="submit">
             Save
           </Button>
         </Form>

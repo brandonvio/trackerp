@@ -3,7 +3,7 @@ import { Navbar, NavbarBrand } from "reactstrap";
 
 export const NavBar = () => {
   return (
-    <Navbar dark expand="md" className={"bg-dark"}>
+    <Navbar expand="md" className={"navbar-dark bg-primary"}>
       <NavbarBrand href="/" className="mr-auto">
         Purchase Tracker
       </NavbarBrand>
