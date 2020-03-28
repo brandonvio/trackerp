@@ -1,3 +1,3 @@
 # Workstation Screenshots
 
-![Alt text](/image01.png "Optional Title")
+![Alt text](/screenshots/image01.png "Optional Title")
