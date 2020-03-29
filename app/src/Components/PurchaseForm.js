@@ -13,7 +13,7 @@ import {
 } from "reactstrap";
 import * as yup from "yup";
 import { Formik } from "formik";
-// import Select from "react-select";
+import { v4 as uuidv4 } from "uuid";
 
 export const PurchaseForm = ({ savePurchase, purchase, categories }) => {
   if (purchase.sk === undefined) {
@@ -21,6 +21,7 @@ export const PurchaseForm = ({ savePurchase, purchase, categories }) => {
   }
 
   function reset() {
+    purchase.sk = undefined;
     purchase.payee = "";
     purchase.amount = "";
     purchase.purchaseDate = "";
@@ -30,6 +31,10 @@ export const PurchaseForm = ({ savePurchase, purchase, categories }) => {
 
   const submitForm = async data => {
     const formData = { ...data };
+    if (formData.sk === undefined) {
+      formData.pk = "PURCHASE";
+      formData.sk = uuidv4();
+    }
     reset();
     formData.purchaseDate = new Date(formData.purchaseDate).toISOString();
     formData.amount = parseFloat(formData.amount);

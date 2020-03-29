@@ -11,43 +11,36 @@ export const Purchases = () => {
   const [categories, setCategories] = useState([]);
   const [summary, setSummary] = useState({});
   const [purchaseEditable, setPurchaseEditable] = useState({});
-
-  const purchaseService = new PurchaseService();
+  const _purchaseService = new PurchaseService();
 
   const getPurchases = async () => {
-    let purchaseData = await trackPromise(purchaseService.getPurchases());
-    console.log(purchaseData);
-    setPurchases(purchaseData);
+    let purchases = await trackPromise(_purchaseService.getPurchases());
+    purchases = _.orderBy(purchases, ["purchaseDate", "amount"], ["desc"]);
+    console.log(purchases);
+    setPurchases(purchases);
     setSummary({
-      transactionCount: purchaseData.length,
-      averagePurchaseAmount: _.meanBy(purchaseData, p => p.amount),
-      totalPurchaseAmount: _.sumBy(purchaseData, p => p.amount)
+      transactionCount: purchases.length,
+      averagePurchaseAmount: _.meanBy(purchases, p => p.amount),
+      totalPurchaseAmount: _.sumBy(purchases, p => p.amount)
     });
 
-    let categories = await trackPromise(purchaseService.getCategories());
+    const categories = await trackPromise(_purchaseService.getCategories());
     console.log(categories);
     setCategories(categories);
   };
 
   const savePurchase = async data => {
-    if (data.purchaseId === undefined) {
-      // console.log("savePurchase", data);
-      await trackPromise(purchaseService.savePurchase(data));
-    } else {
-      // console.log("updatePurchase", data);
-      await trackPromise(purchaseService.updatePurchase(data));
-    }
+    await trackPromise(_purchaseService.savePurchase(data));
     getPurchases();
   };
 
   const deletePurchase = async purchaseId => {
-    // console.log("deletePurchase", purchaseId);
-    await trackPromise(purchaseService.deletePurchase(purchaseId));
+    await trackPromise(_purchaseService.deletePurchase(purchaseId));
     getPurchases();
   };
 
   const editPurchase = async purchaseId => {
-    const purchase = await trackPromise(purchaseService.getPurchase(purchaseId));
+    const purchase = await trackPromise(_purchaseService.getPurchase(purchaseId));
     setPurchaseEditable(purchase);
   };
 

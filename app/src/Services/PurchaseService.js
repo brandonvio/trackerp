@@ -21,11 +21,6 @@ export class PurchaseService {
     return result.data;
   }
 
-  async updatePurchase(data) {
-    let result = await axios.put(`${this.purchaseApi}/${data.purchaseId}`, data);
-    return result.data;
-  }
-
   async deletePurchase(purchaseId) {
     let result = await axios.delete(`${this.purchaseApi}/${purchaseId}`);
     return result.data;
