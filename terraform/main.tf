@@ -1,8 +1,6 @@
 #############################################################
 # Brandon Vicedomini
-# Onica DevOps Test
-# Approach 2
-# Completed 3/27/2020
+# Purchase Tracker IAC
 #############################################################
 provider "aws" {
   region  = var.aws_region
