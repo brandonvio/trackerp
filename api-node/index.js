@@ -1,11 +1,11 @@
 require("dotenv").config();
 const PurchaseService = require("./PurchaseService");
-const purchaseService = new PurchaseService();
+const _purchaseService = new PurchaseService();
 
 exports.getPurchase = async function(event) {
   try {
     const purchaseId = event.pathParameters.purchaseId;
-    const result = await purchaseService.getPurchase(purchaseId);
+    const result = await _purchaseService.getPurchase(purchaseId);
     console.log(JSON.stringify(result));
     return buildReponse(result.Item, 200);
   } catch (error) {
@@ -17,7 +17,7 @@ exports.getPurchase = async function(event) {
 exports.deletePurchase = async function(event) {
   try {
     const purchaseId = event.pathParameters.purchaseId;
-    const result = await purchaseService.deletePurchase(purchaseId);
+    const result = await _purchaseService.deletePurchase(purchaseId);
     console.log(JSON.stringify(result));
     return buildReponse(result, 200);
   } catch (error) {
@@ -29,7 +29,7 @@ exports.deletePurchase = async function(event) {
 exports.savePurchase = async function(event) {
   try {
     console.log(event.body);
-    const result = await purchaseService.savePurchase(JSON.parse(event.body));
+    const result = await _purchaseService.savePurchase(JSON.parse(event.body));
     console.log(JSON.stringify(result));
     return buildReponse(result, 200);
   } catch (error) {
@@ -40,7 +40,7 @@ exports.savePurchase = async function(event) {
 
 exports.getPurchaseList = async function(event) {
   try {
-    const result = await purchaseService.getPurchaseList();
+    const result = await _purchaseService.getPurchaseList();
     console.log(JSON.stringify(result));
     return buildReponse(result, 200);
   } catch (error) {
@@ -51,7 +51,7 @@ exports.getPurchaseList = async function(event) {
 
 exports.getCategoryList = async function(event) {
   try {
-    const result = await purchaseService.getCategoryList();
+    const result = await _purchaseService.getCategoryList();
     console.log(JSON.stringify(result));
     return buildReponse(result, 200);
   } catch (error) {
@@ -62,10 +62,10 @@ exports.getCategoryList = async function(event) {
 
 exports.seed = async function(event) {
   try {
-    let result = await purchaseService.seedCategories();
+    let result = await _purchaseService.seedCategories();
     console.log(JSON.stringify(result));
 
-    result = await purchaseService.seedPurchases();
+    result = await _purchaseService.seedPurchases();
     console.log(JSON.stringify(result));
 
     return buildReponse(result, 200);
@@ -79,6 +79,7 @@ function buildReponse(data, status) {
   var response = {
     statusCode: status,
     headers: {
+      "Access-Control-Allow-Methods": "*",
       "Access-Control-Allow-Origin": "*"
     },
     body: JSON.stringify(data),

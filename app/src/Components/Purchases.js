@@ -65,6 +65,8 @@ export const Purchases = () => {
         categories={categories}
       />
       <br />
+      <PurchaseSummary summary={summary} />
+      <br />
       {purchases.map(item => (
         <Purchase
           key={item.sk}
@@ -73,8 +75,6 @@ export const Purchases = () => {
           editPurchase={editPurchase}
         />
       ))}
-      <br />
-      <PurchaseSummary summary={summary} />
       <br />
     </div>
   );
