@@ -1,0 +1,16 @@
+terraform-aws-api-gateway-enable-cors-0.3.1 (2020-01-27)
+
+  * Fixed terraform-0.12.6 deprecations
+
+terraform-aws-api-gateway-enable-cors-0.3.0 (2019-06-10)
+
+  * Upgraded to terraform-0.12.x
+
+terraform-aws-api-gateway-enable-cors-0.2.0 (2018-12-24)
+
+  * Added support for Access-Control-Allow-Credentials header
+  * Renamed allowed_* variables to allow_* to match header names
+
+terraform-aws-api-gateway-enable-cors-0.1.0 (2018-06-12)
+
+  * Initial release
