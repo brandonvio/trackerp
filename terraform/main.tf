@@ -93,7 +93,7 @@ resource "aws_lambda_function" "get-purchase-list-function" {
   source_code_hash = filebase64sha256("package.zip")
   runtime          = "nodejs12.x"
   publish          = true
-  depends_on       = [aws_cloudwatch_log_group.purchase-api-log-group]
+  depends_on       = [aws_cloudwatch_log_group.get-purchase-list-log-group]
 
   tags = {
     Name = "getPurchaseList"
@@ -111,7 +111,7 @@ resource "aws_lambda_function" "get-purchase-function" {
   source_code_hash = filebase64sha256("package.zip")
   runtime          = "nodejs12.x"
   publish          = true
-  depends_on       = [aws_cloudwatch_log_group.purchase-api-log-group]
+  depends_on       = [aws_cloudwatch_log_group.get-purchase-log-group]
 
   tags = {
     Name = "getPurchase"
@@ -129,7 +129,7 @@ resource "aws_lambda_function" "save-purchase-function" {
   source_code_hash = filebase64sha256("package.zip")
   runtime          = "nodejs12.x"
   publish          = true
-  depends_on       = [aws_cloudwatch_log_group.purchase-api-log-group]
+  depends_on       = [aws_cloudwatch_log_group.save-purchase-log-group]
 
   tags = {
     Name = "savePurchase"
@@ -147,7 +147,7 @@ resource "aws_lambda_function" "delete-purchase-function" {
   source_code_hash = filebase64sha256("package.zip")
   runtime          = "nodejs12.x"
   publish          = true
-  depends_on       = [aws_cloudwatch_log_group.purchase-api-log-group]
+  depends_on       = [aws_cloudwatch_log_group.delete-purchase-log-group]
 
   tags = {
     Name = "deletePurchase"
@@ -165,7 +165,7 @@ resource "aws_lambda_function" "get-category-list-function" {
   source_code_hash = filebase64sha256("package.zip")
   runtime          = "nodejs12.x"
   publish          = true
-  depends_on       = [aws_cloudwatch_log_group.purchase-api-log-group]
+  depends_on       = [aws_cloudwatch_log_group.get-category-list-log-group]
 
   tags = {
     Name = "getCategoryList"
@@ -183,7 +183,7 @@ resource "aws_lambda_function" "seed-purchase-function" {
   source_code_hash = filebase64sha256("package.zip")
   runtime          = "nodejs12.x"
   publish          = true
-  depends_on       = [aws_cloudwatch_log_group.purchase-api-log-group]
+  depends_on       = [aws_cloudwatch_log_group.seed-log-group]
 
   tags = {
     Name = "Purchase Tracker IOC Seed"
@@ -193,8 +193,33 @@ resource "aws_lambda_function" "seed-purchase-function" {
 #############################################################
 # Cloudwatch.
 #############################################################
-resource "aws_cloudwatch_log_group" "purchase-api-log-group" {
-  name              = "/aws/lambda/purchaseApi"
+resource "aws_cloudwatch_log_group" "get-purchase-list-log-group" {
+  name              = "/aws/lambda/getPurchaseList"
+  retention_in_days = 30
+}
+
+resource "aws_cloudwatch_log_group" "get-purchase-log-group" {
+  name              = "/aws/lambda/getPurchase"
+  retention_in_days = 30
+}
+
+resource "aws_cloudwatch_log_group" "save-purchase-log-group" {
+  name              = "/aws/lambda/savePurchase"
+  retention_in_days = 30
+}
+
+resource "aws_cloudwatch_log_group" "delete-purchase-log-group" {
+  name              = "/aws/lambda/deletePurchase"
+  retention_in_days = 30
+}
+
+resource "aws_cloudwatch_log_group" "get-category-list-log-group" {
+  name              = "/aws/lambda/getCategoryList"
+  retention_in_days = 30
+}
+
+resource "aws_cloudwatch_log_group" "seed-log-group" {
+  name              = "/aws/lambda/seed"
   retention_in_days = 30
 }
 
