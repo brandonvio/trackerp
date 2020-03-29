@@ -209,6 +209,24 @@ resource "aws_lambda_function" "get-category-list-function" {
   }
 }
 
+#------------------------------------------------------------
+# seed
+#------------------------------------------------------------
+resource "aws_lambda_function" "seed-purchase-function" {
+  filename         = "package.zip"
+  function_name    = "seed"
+  role             = aws_iam_role.purchase-lambda-role.arn
+  handler          = "index.seed"
+  source_code_hash = filebase64sha256("package.zip")
+  runtime          = "nodejs12.x"
+  publish          = true
+  depends_on       = [aws_cloudwatch_log_group.purchase-api-log-group]
+
+  tags = {
+    Name = "Purchase Tracker IOC Seed"
+  }
+}
+
 #############################################################
 # Cloudwatch.
 #############################################################
@@ -241,6 +259,12 @@ resource "aws_api_gateway_resource" "purchase-purchaseid-resource" {
   rest_api_id = aws_api_gateway_rest_api.purchase-api.id
   parent_id   = aws_api_gateway_resource.purchase-resource.id
   path_part   = "{purchaseId}"
+}
+
+resource "aws_api_gateway_resource" "purchase-seed-resource" {
+  rest_api_id = aws_api_gateway_rest_api.purchase-api.id
+  parent_id   = aws_api_gateway_resource.purchase-resource.id
+  path_part   = "seed"
 }
 
 #------------------------------------------------------------
@@ -349,6 +373,25 @@ resource "aws_api_gateway_integration" "delete-purchase-method-integration" {
   integration_http_method = "POST"
 }
 
+#------------------------------------------------------------
+# seed-purchase integrations
+#------------------------------------------------------------
+resource "aws_api_gateway_method" "seed-purchase-method" {
+  rest_api_id   = aws_api_gateway_rest_api.purchase-api.id
+  resource_id   = aws_api_gateway_resource.purchase-seed-resource.id
+  http_method   = "GET"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "seed-purchase-method-integration" {
+  rest_api_id             = aws_api_gateway_rest_api.purchase-api.id
+  resource_id             = aws_api_gateway_resource.purchase-seed-resource.id
+  http_method             = aws_api_gateway_method.seed-purchase-method.http_method
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.seed-purchase-function.invoke_arn
+  integration_http_method = "POST"
+}
+
 #************************************************************
 #------------------------------------------------------------
 # deployments
@@ -407,6 +450,14 @@ resource "aws_lambda_permission" "delete-purchase-lambda-permission" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.delete-purchase-function.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.purchase-api.execution_arn}/*/*/*"
+}
+
+resource "aws_lambda_permission" "seed-purchase-lambda-permission" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.seed-purchase-function.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_api_gateway_rest_api.purchase-api.execution_arn}/*/*/*"
 }
@@ -519,4 +570,16 @@ output "get_category_list_dev_url" {
 
 output "get_category_list_prod_url" {
   value = "https://${aws_api_gateway_deployment.category-deployment-prod.rest_api_id}.execute-api.${var.aws_region}.amazonaws.com/${aws_api_gateway_deployment.category-deployment-prod.stage_name}"
+}
+
+#############################################################
+# S3 static website
+#############################################################
+resource "aws_s3_bucket" "site_bucket" {
+  bucket = var.site_name
+  acl    = "public-read"
+  website {
+    index_document = "index.html"
+    error_document = "error.html"
+  }
 }

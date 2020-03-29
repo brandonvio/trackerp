@@ -60,21 +60,14 @@ exports.getCategoryList = async function(event) {
   }
 };
 
-exports.seedCategories = async function(event) {
+exports.seed = async function(event) {
   try {
-    const result = await purchaseService.seedCategories();
+    let result = await purchaseService.seedCategories();
     console.log(JSON.stringify(result));
-    return buildReponse(result, 200);
-  } catch (error) {
-    console.error(error);
-    return buildReponse(error, 500);
-  }
-};
 
-exports.seedPurchases = async function(event) {
-  try {
-    const result = await purchaseService.seedPurchases();
+    result = await purchaseService.seedPurchases();
     console.log(JSON.stringify(result));
+
     return buildReponse(result, 200);
   } catch (error) {
     console.error(error);

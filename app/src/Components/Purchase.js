@@ -30,31 +30,35 @@ export const Purchase = ({ item, deletePurchase, editPurchase }) => {
             <tr>
               <th>Category</th>
               <td>{item.category}</td>
-              <td colSpan="2">
-                <Button
-                  size="sm"
-                  color="info"
-                  onClick={() => {
-                    editPurchase(item.sk);
-                  }}
-                >
-                  Edit
-                </Button>
-                <Button
-                  size="sm"
-                  color="secondary"
-                  onClick={() => {
-                    deletePurchase(item.sk);
-                  }}
-                >
-                  Delete
-                </Button>
-              </td>
+              <td colSpan="2"></td>
             </tr>
           </tbody>
         </table>
       </CardBody>
-      <CardFooter>{item.memo}</CardFooter>
+      <CardFooter>
+        <div style={{ float: "left" }}>{item.memo}</div>
+        <div style={{ float: "right" }}>
+          <Button
+            size="sm"
+            color="info"
+            onClick={() => {
+              editPurchase(item.sk);
+            }}
+          >
+            Edit
+          </Button>
+          &nbsp;
+          <Button
+            size="sm"
+            color="danger"
+            onClick={() => {
+              deletePurchase(item.sk);
+            }}
+          >
+            Delete
+          </Button>
+        </div>
+      </CardFooter>
     </Card>
   );
 };
