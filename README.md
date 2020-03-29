@@ -12,4 +12,6 @@
 
 ![Alt text](https://raw.githubusercontent.com/brandonvio/purchase-tracker-ioc/master/desktop-screenshots/PurchaseTracker01.png "Workstation screenshot...")
 
+![Alt text](https://raw.githubusercontent.com/brandonvio/purchase-tracker-ioc/master/desktop-screenshots/PurchaseTracker03.png "Workstation screenshot...")
+
 ![Alt text](https://raw.githubusercontent.com/brandonvio/purchase-tracker-ioc/master/desktop-screenshots/PurchaseTracker02.png "Workstation screenshot...")
