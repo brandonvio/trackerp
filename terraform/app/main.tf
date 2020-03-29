@@ -47,7 +47,6 @@ resource "aws_cloudfront_distribution" "distribution" {
   enabled             = true
   default_root_object = "index.html"
 
-  // All values are defaults from the AWS console.
   default_cache_behavior {
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
@@ -66,10 +65,6 @@ resource "aws_cloudfront_distribution" "distribution" {
     }
   }
 
-  // Here we're ensuring we can hit this distribution using www.runatlantis.io
-  // rather than the domain name CloudFront gives us.
-  # aliases = [var.site_name]
-
   restrictions {
     geo_restriction {
       restriction_type = "none"
@@ -79,12 +74,6 @@ resource "aws_cloudfront_distribution" "distribution" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
-
-  # // Here's where our certificate is loaded in!
-  # viewer_certificate {
-  #   acm_certificate_arn = "${aws_acm_certificate.certificate.arn}"
-  #   ssl_support_method  = "sni-only"
-  # }
 }
 
 output "cloudfront_website_endpoint" {
