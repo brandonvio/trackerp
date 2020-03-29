@@ -575,11 +575,26 @@ output "get_category_list_prod_url" {
 #############################################################
 # S3 static website
 #############################################################
+data "template_file" "s3_public_policy" {
+  template = "${file("policies/s3-public.json")}"
+  vars = {
+    bucket_name = "${var.site_name}"
+  }
+}
+
 resource "aws_s3_bucket" "site_bucket" {
   bucket = var.site_name
   acl    = "public-read"
+  policy = data.template_file.s3_public_policy.rendered
   website {
     index_document = "index.html"
     error_document = "error.html"
   }
+  tags = {
+    name : "purchase-tracker-ioc-website-bucket"
+  }
+}
+
+output "s3_website_endpoint" {
+  value = "${aws_s3_bucket.site_bucket.website_endpoint}"
 }
