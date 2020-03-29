@@ -3,6 +3,7 @@ import { Purchase } from "./Purchase";
 import { PurchaseService } from "../Services/PurchaseService";
 import { PurchaseSummary } from "./PurchaseSummary";
 import { PurchaseForm } from "./PurchaseForm";
+import { trackPromise } from "react-promise-tracker";
 import _ from "lodash";
 
 export const Purchases = () => {
@@ -14,7 +15,7 @@ export const Purchases = () => {
   const purchaseService = new PurchaseService();
 
   const getPurchases = async () => {
-    let purchaseData = await purchaseService.getPurchases();
+    let purchaseData = await trackPromise(purchaseService.getPurchases());
     console.log(purchaseData);
     setPurchases(purchaseData);
     setSummary({
@@ -23,7 +24,7 @@ export const Purchases = () => {
       totalPurchaseAmount: _.sumBy(purchaseData, p => p.amount)
     });
 
-    let categories = await purchaseService.getCategories();
+    let categories = await trackPromise(purchaseService.getCategories());
     console.log(categories);
     setCategories(categories);
   };
@@ -31,22 +32,22 @@ export const Purchases = () => {
   const savePurchase = async data => {
     if (data.purchaseId === undefined) {
       // console.log("savePurchase", data);
-      await purchaseService.savePurchase(data);
+      await trackPromise(purchaseService.savePurchase(data));
     } else {
       // console.log("updatePurchase", data);
-      await purchaseService.updatePurchase(data);
+      await trackPromise(purchaseService.updatePurchase(data));
     }
     getPurchases();
   };
 
   const deletePurchase = async purchaseId => {
     // console.log("deletePurchase", purchaseId);
-    await purchaseService.deletePurchase(purchaseId);
+    await trackPromise(purchaseService.deletePurchase(purchaseId));
     getPurchases();
   };
 
   const editPurchase = async purchaseId => {
-    const purchase = await purchaseService.getPurchase(purchaseId);
+    const purchase = await trackPromise(purchaseService.getPurchase(purchaseId));
     setPurchaseEditable(purchase);
   };
 
