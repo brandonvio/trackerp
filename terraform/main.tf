@@ -55,26 +55,12 @@ resource "aws_dynamodb_table" "purchase-dynamodb-table" {
 # lambda role
 #------------------------------------------------------------
 resource "aws_iam_role" "purchase-lambda-role" {
-  name = "purchase-lambda-role"
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": [
-          "lambda.amazonaws.com",
-          "apigateway.amazonaws.com"
-        ]
-      },
-      "Effect": "Allow",
-      "Sid": ""
-    }
-  ]
+  name               = "purchase-lambda-role"
+  assume_role_policy = data.template_file.lambda-role-policy.rendered
 }
-EOF
+
+data "template_file" "lambda-role-policy" {
+  template = "${file("policies/lambda-role-policy.json")}"
 }
 
 #------------------------------------------------------------
@@ -83,37 +69,16 @@ EOF
 resource "aws_iam_role_policy" "purchase-lambda-policy" {
   name   = "dynamodb_lambda_policy"
   role   = aws_iam_role.purchase-lambda-role.id
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "dynamodb:GetItem",
-        "dynamodb:Scan",
-        "dynamodb:PutItem",
-        "dynamodb:Query",
-        "dynamodb:DeleteItem"
-      ],
-      "Resource": "${aws_dynamodb_table.purchase-dynamodb-table.arn}"
-    },
-		{
-			"Effect": "Allow",
-			"Action": [
-				"logs:CreateLogStream",
-				"logs:PutLogEvents"
-			],
-			"Resource": "arn:aws:logs:${var.aws_region}:${var.aws_account_id}:*"
-		},
-		{
-			"Effect": "Allow",
-			"Action": "logs:CreateLogGroup",
-			"Resource": "*"
-		}
-  ]
+  policy = data.template_file.lambda-policy.rendered
 }
-EOF
+
+data "template_file" "lambda-policy" {
+  template = "${file("policies/lambda-policy.json")}"
+  vars = {
+    aws_region         = "${var.aws_region}"
+    aws_account_id     = "${var.aws_account_id}"
+    aws_dynamodb_table = "${aws_dynamodb_table.purchase-dynamodb-table.arn}"
+  }
 }
 
 #############################################################
