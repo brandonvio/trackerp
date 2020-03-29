@@ -1,4 +1,4 @@
-# Purchase Tracker - IOC
+# Purchase Tracker - IAC
 
 ## AWS via Terraform
 
