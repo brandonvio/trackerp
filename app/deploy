@@ -3,4 +3,4 @@ echo ##################### Package
 npm run-script build
 
 echo ##################### Deploy
-aws s3 sync build/ s3://purchase-tracker-ioc --acl public-read --profile terransible
+aws s3 sync build/ s3://trackerp.xyz --acl public-read --profile terransible

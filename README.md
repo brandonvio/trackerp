@@ -2,9 +2,7 @@
 
 ## AWS via Terraform
 
-### Hosted on AWS at ~
-
-[purchase-tracker-ioc.s3-website-us-west-2.amazonaws.com](http://purchase-tracker-ioc.s3-website-us-west-2.amazonaws.com)
+### [Hosted on AWS](http://purchase-tracker-ioc.s3-website-us-west-2.amazonaws.com)
 
 #### Built using ~
 
