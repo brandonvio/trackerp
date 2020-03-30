@@ -17,28 +17,30 @@ import { v4 as uuidv4 } from "uuid";
 
 export const PurchaseForm = ({ savePurchase, purchase, categories }) => {
   if (purchase.sk === undefined) {
-    reset();
+    reset(purchase);
   }
 
-  function reset() {
-    purchase.sk = undefined;
-    purchase.payee = "";
-    purchase.amount = "";
-    purchase.purchaseDate = "";
-    purchase.memo = "";
-    purchase.category = "";
+  function reset(data) {
+    data.sk = undefined;
+    data.payee = "";
+    data.amount = "";
+    data.purchaseDate = "";
+    data.memo = "";
+    data.category = "";
   }
 
-  const submitForm = async data => {
+  const submitForm = async (data, bag) => {
     const formData = { ...data };
+    bag.resetForm();
     if (formData.sk === undefined) {
       formData.pk = "PURCHASE";
       formData.sk = uuidv4();
+      reset(data);
+    } else {
+      reset(purchase);
     }
-    reset();
     formData.purchaseDate = new Date(formData.purchaseDate).toISOString();
     formData.amount = parseFloat(formData.amount);
-
     await savePurchase(formData);
   };
 
@@ -120,7 +122,7 @@ export const PurchaseForm = ({ savePurchase, purchase, categories }) => {
                     <FormGroup>
                       <Label for="purchaseDate">Date of Purchase</Label>
                       <Input
-                        type="text"
+                        type="date"
                         name="purchaseDate"
                         id="purchaseDate"
                         value={values.purchaseDate}

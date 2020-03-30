@@ -12,7 +12,7 @@ export class PurchaseService {
   async getPurchase(purchaseId) {
     let result = await axios.get(`${this.purchaseApi}/${purchaseId}`);
     const item = result.data;
-    item.purchaseDate = new Date(item.purchaseDate).toLocaleDateString();
+    item.purchaseDate = item.purchaseDate.split("T")[0];
     return item;
   }
 
