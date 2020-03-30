@@ -50,7 +50,7 @@ export const Purchase = ({ item, deletePurchase, editPurchase }) => {
           &nbsp;
           <Button
             size="sm"
-            color="danger"
+            className={"btn-outline-danger"}
             onClick={() => {
               deletePurchase(item.sk);
             }}
