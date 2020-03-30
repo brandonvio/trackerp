@@ -5,14 +5,13 @@ import { Purchases } from "./Components/Purchases";
 import { Container } from "reactstrap";
 import { usePromiseTracker } from "react-promise-tracker";
 import Loader from "react-loader-spinner";
-import "./App.css";
 
 function App() {
   const { promiseInProgress } = usePromiseTracker();
   return (
     <div>
-      {promiseInProgress && <LoadingIndicator />}
       <Container>
+        {promiseInProgress && <LoadingIndicator />}
         <NavBar />
         <br />
         <Header />
@@ -23,9 +22,16 @@ function App() {
 }
 
 const LoadingIndicator = () => {
+  const style = {
+    zIndex: 1000,
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
+  };
   return (
-    <div className="exactCenter">
-      <Loader type="ThreeDots" color="#3498DB" height={100} width={100} />
+    <div style={style}>
+      <Loader type="Oval" color="#3498DB" height={200} width={200} />
     </div>
   );
 };
