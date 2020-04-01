@@ -87,7 +87,7 @@ data "template_file" "lambda-policy" {
 #------------------------------------------------------------
 resource "aws_lambda_function" "get-purchase-list-function" {
   filename         = "package.zip"
-  function_name    = "getPurchaseList"
+  function_name    = "trackerp-getPurchaseList"
   role             = aws_iam_role.purchase-lambda-role.arn
   handler          = "index.getPurchaseList"
   source_code_hash = filebase64sha256("package.zip")
@@ -105,7 +105,7 @@ resource "aws_lambda_function" "get-purchase-list-function" {
 #------------------------------------------------------------
 resource "aws_lambda_function" "get-purchase-function" {
   filename         = "package.zip"
-  function_name    = "getPurchase"
+  function_name    = "trackerp-getPurchase"
   role             = aws_iam_role.purchase-lambda-role.arn
   handler          = "index.getPurchase"
   source_code_hash = filebase64sha256("package.zip")
@@ -123,7 +123,7 @@ resource "aws_lambda_function" "get-purchase-function" {
 #------------------------------------------------------------
 resource "aws_lambda_function" "save-purchase-function" {
   filename         = "package.zip"
-  function_name    = "savePurchase"
+  function_name    = "trackerp-savePurchase"
   role             = aws_iam_role.purchase-lambda-role.arn
   handler          = "index.savePurchase"
   source_code_hash = filebase64sha256("package.zip")
@@ -141,7 +141,7 @@ resource "aws_lambda_function" "save-purchase-function" {
 #------------------------------------------------------------
 resource "aws_lambda_function" "delete-purchase-function" {
   filename         = "package.zip"
-  function_name    = "deletePurchase"
+  function_name    = "trackerp-deletePurchase"
   role             = aws_iam_role.purchase-lambda-role.arn
   handler          = "index.deletePurchase"
   source_code_hash = filebase64sha256("package.zip")
@@ -159,7 +159,7 @@ resource "aws_lambda_function" "delete-purchase-function" {
 #------------------------------------------------------------
 resource "aws_lambda_function" "get-category-list-function" {
   filename         = "package.zip"
-  function_name    = "getCategoryList"
+  function_name    = "trackerp-getCategoryList"
   role             = aws_iam_role.purchase-lambda-role.arn
   handler          = "index.getCategoryList"
   source_code_hash = filebase64sha256("package.zip")
@@ -177,7 +177,7 @@ resource "aws_lambda_function" "get-category-list-function" {
 #------------------------------------------------------------
 resource "aws_lambda_function" "seed-purchase-function" {
   filename         = "package.zip"
-  function_name    = "seed"
+  function_name    = "trackerp-seed"
   role             = aws_iam_role.purchase-lambda-role.arn
   handler          = "index.seed"
   source_code_hash = filebase64sha256("package.zip")

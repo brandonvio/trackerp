@@ -8,7 +8,7 @@ provider "aws" {
 }
 
 locals {
-  bucket_name = "${var.site_name}"
+  bucket_name = "origin.${var.site_name}"
 }
 
 #############################################################
