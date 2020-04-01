@@ -255,41 +255,6 @@ resource "aws_api_gateway_resource" "purchase-seed-resource" {
   path_part   = "seed"
 }
 
-#------------------------------------------------------------
-# purchase api cors
-#------------------------------------------------------------
-module "purchase_api_cors" {
-  source          = "squidfunk/api-gateway-enable-cors/aws"
-  version         = "0.3.1"
-  api_id          = aws_api_gateway_rest_api.purchase-api.id
-  api_resource_id = aws_api_gateway_resource.purchase-resource.id
-  allow_origin    = "*"
-  allow_headers = [
-    "Access-Control-Allow-Origin",
-    "Authorization",
-    "Content-Type",
-    "X-Amz-Date",
-    "X-Amz-Security-Token",
-    "X-Api-Key"
-  ]
-}
-
-module "purchase_id_api_cors" {
-  source          = "squidfunk/api-gateway-enable-cors/aws"
-  version         = "0.3.1"
-  api_id          = aws_api_gateway_rest_api.purchase-api.id
-  api_resource_id = aws_api_gateway_resource.purchase-purchaseid-resource.id
-  allow_origin    = "*"
-  allow_headers = [
-    "Access-Control-Allow-Origin",
-    "Authorization",
-    "Content-Type",
-    "X-Amz-Date",
-    "X-Amz-Security-Token",
-    "X-Api-Key"
-  ]
-}
-
 #************************************************************
 # API Gateway to Lambda integrations
 #************************************************************
@@ -464,6 +429,42 @@ resource "aws_lambda_permission" "seed-purchase-lambda-permission" {
   function_name = aws_lambda_function.seed-purchase-function.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_api_gateway_rest_api.purchase-api.execution_arn}/*/*/*"
+}
+
+
+#------------------------------------------------------------
+# purchase api cors
+#------------------------------------------------------------
+module "purchase_api_cors" {
+  source          = "squidfunk/api-gateway-enable-cors/aws"
+  version         = "0.3.1"
+  api_id          = aws_api_gateway_rest_api.purchase-api.id
+  api_resource_id = aws_api_gateway_resource.purchase-resource.id
+  allow_origin    = "*"
+  allow_headers = [
+    "Access-Control-Allow-Origin",
+    "Authorization",
+    "Content-Type",
+    "X-Amz-Date",
+    "X-Amz-Security-Token",
+    "X-Api-Key"
+  ]
+}
+
+module "purchase_id_api_cors" {
+  source          = "squidfunk/api-gateway-enable-cors/aws"
+  version         = "0.3.1"
+  api_id          = aws_api_gateway_rest_api.purchase-api.id
+  api_resource_id = aws_api_gateway_resource.purchase-purchaseid-resource.id
+  allow_origin    = "*"
+  allow_headers = [
+    "Access-Control-Allow-Origin",
+    "Authorization",
+    "Content-Type",
+    "X-Amz-Date",
+    "X-Amz-Security-Token",
+    "X-Api-Key"
+  ]
 }
 
 #************************************************************

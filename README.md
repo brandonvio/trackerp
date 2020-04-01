@@ -2,7 +2,7 @@
 
 ## AWS via Terraform
 
-### [Hosted on AWS](https://d37py4724x04y4.cloudfront.net)
+### [Hosted on AWS](https://d2lq101g4g5eoi.cloudfront.net)
 
 ### Purchase tracking application.
 
