@@ -8,7 +8,7 @@
 
 ### react + nodejs + lambda + dynamodb + api gateway + s3 + cloudfront + iac with terraform
 
-![Architecture](https://raw.githubusercontent.com/brandonvio/trackerp/master/public/images/arch.png)
+![Architecture](https://raw.githubusercontent.com/brandonvio/trackerp/master/app/public/images/arch.png)
 
 ![Alt text](https://raw.githubusercontent.com/brandonvio/purchase-tracker-ioc/master/desktop-screenshots/PurchaseTracker04.png "Workstation screenshot...")
 
