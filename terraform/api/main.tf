@@ -96,7 +96,7 @@ resource "aws_lambda_function" "get-purchase-list-function" {
   depends_on       = [aws_cloudwatch_log_group.get-purchase-list-log-group]
 
   tags = {
-    Name = "getPurchaseList"
+    Name = "trackerp-getPurchaseList"
   }
 }
 
@@ -114,7 +114,7 @@ resource "aws_lambda_function" "get-purchase-function" {
   depends_on       = [aws_cloudwatch_log_group.get-purchase-log-group]
 
   tags = {
-    Name = "getPurchase"
+    Name = "trackerp-getPurchase"
   }
 }
 
@@ -132,7 +132,7 @@ resource "aws_lambda_function" "save-purchase-function" {
   depends_on       = [aws_cloudwatch_log_group.save-purchase-log-group]
 
   tags = {
-    Name = "savePurchase"
+    Name = "trackerp-savePurchase"
   }
 }
 
@@ -150,7 +150,7 @@ resource "aws_lambda_function" "delete-purchase-function" {
   depends_on       = [aws_cloudwatch_log_group.delete-purchase-log-group]
 
   tags = {
-    Name = "deletePurchase"
+    Name = "trackerp-deletePurchase"
   }
 }
 
@@ -168,7 +168,7 @@ resource "aws_lambda_function" "get-category-list-function" {
   depends_on       = [aws_cloudwatch_log_group.get-category-list-log-group]
 
   tags = {
-    Name = "getCategoryList"
+    Name = "trackerp-getCategoryList"
   }
 }
 
@@ -186,7 +186,7 @@ resource "aws_lambda_function" "seed-purchase-function" {
   depends_on       = [aws_cloudwatch_log_group.seed-log-group]
 
   tags = {
-    Name = "Purchase Tracker IOC Seed"
+    Name = "trackerp-seed"
   }
 }
 
