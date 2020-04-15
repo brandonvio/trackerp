@@ -10,7 +10,7 @@ node {
         echo "Get env file."
         sh "aws s3 ls"
         sh "terraform --version"
-        sh "cd terraform/api"
+        sh "cd ./terraform/api"
         sh "pwd"
         sh "ls"
         sh "terraform init"
