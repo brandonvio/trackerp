@@ -26,25 +26,29 @@ node {
                 sh "pwd"
                 sh "ls"
                 sh "terraform init"
-                sh "terraform plan"
+                sh "terraform apply -auto-approve"
             }
         }
     }
 
     stage("APP"){
 
-        dir ('app'){
-            sh "npm install"
-            sh "npm run-script build"
-            sh "aws s3 sync build/ s3://origin.trackerp.xyz --acl public-read"
-            sh 'aws cloudfront create-invalidation --distribution-id E26NHRKWDSAWLX --paths "/*"'
+        stage('build'){
+            dir ('app'){
+                sh "npm install"
+                sh "npm run-script build"
+                sh "aws s3 sync build/ s3://origin.trackerp.xyz --acl public-read"
+                sh 'aws cloudfront create-invalidation --distribution-id E26NHRKWDSAWLX --paths "/*"'
+            }
         }
 
-        dir ('terraform/app'){
-            sh "pwd"
-            sh "ls"
-            sh "terraform init"
-            sh "terraform plan"
+        stage('deploy'){
+            dir ('terraform/app'){
+                sh "pwd"
+                sh "ls"
+                sh "terraform init"
+                sh "terraform apply -auto-approve"
+            }
         }
     }
 }
