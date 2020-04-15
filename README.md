@@ -1,6 +1,6 @@
 # trackerp
 
-Lightweight purchase tracking. Serverless. Built with care on AWS, Lambda, DynamoDB and Terraform.
+Lightweight purchase tracking. Serverless. Built with care on AWS with Lambda, DynamoDB and Terraform.
 
 Access the running application here:  
 [trackerp](https://d2lq101g4g5eoi.cloudfront.net/)
