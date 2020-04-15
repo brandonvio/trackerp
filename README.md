@@ -13,6 +13,7 @@ Access the running application here:
 - AWS CloudFront - content distribution
 - AWS Certificate Manager - SSL certificate
 - Terraform - infrastructure as code
+- Jenkins - CI/CD
 
 ## architecture - back end
 
@@ -21,6 +22,7 @@ Access the running application here:
 - AWS API Gateway - api service
 - DynamoDB - serverless nosql database service
 - Terraform - infrastructure as code
+- Jenkins - CI/CD
 
 ![Architecture](https://raw.githubusercontent.com/brandonvio/trackerp/master/app/public/images/arch.png)
 
