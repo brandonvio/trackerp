@@ -11,7 +11,6 @@ node {
             echo "Let's begin."
             sh "aws s3 ls"
             sh "terraform --version"
-
             dir('api'){
                 sh "zip -r package.zip *"
                 sh "cp package.zip ../terraform/api"
