@@ -11,6 +11,11 @@ node {
         sh "aws s3 ls"
         sh "terraform --version"
 
+        dir('api'){
+            sh "zip -r package.zip *"
+            sh "cp package.zip ../terraform/api"
+        }
+
         dir ('terraform/api'){
             sh "pwd"
             sh "ls"
