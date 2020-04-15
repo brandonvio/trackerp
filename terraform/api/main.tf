@@ -3,8 +3,16 @@
 # Purchase Tracker IAC
 #############################################################
 provider "aws" {
-  region  = var.aws_region
-  profile = var.aws_profile
+  region = var.aws_region
+}
+
+terraform {
+  backend "s3" {
+    bucket         = "terraform-backend-trackerp"
+    key            = "api.tfstate"
+    dynamodb_table = "TrackerpTerraform"
+    region         = "us-west-2"
+  }
 }
 
 #############################################################
