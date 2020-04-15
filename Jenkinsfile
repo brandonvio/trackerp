@@ -8,7 +8,7 @@ node {
     }
     stage('build'){
         echo "Get env file."
-        sh aws s3 ls
+        sh "aws s3 ls"
         // sh "cp /var/jenkins_home/secrets/env/env-rythm-api ."
         // sh "mv env-rythm-api .env"
         // sh "ls -al"
