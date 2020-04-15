@@ -17,6 +17,13 @@ node {
             sh "terraform init"
             sh "terraform plan"
         }
+
+        dir ('terraform/app'){
+            sh "pwd"
+            sh "ls"
+            sh "terraform init"
+            sh "terraform plan"
+        }
         
         // sh "cp /var/jenkins_home/secrets/env/env-rythm-api ."
         // sh "mv env-rythm-api .env"
