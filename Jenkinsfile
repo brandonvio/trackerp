@@ -11,6 +11,7 @@ node {
         sh "aws s3 ls"
         sh "terraform --version"
         sh "cd terraform/api"
+        sh "pwd"
         sh "terraform init"
         sh "terraform plan"
         // sh "cp /var/jenkins_home/secrets/env/env-rythm-api ."
