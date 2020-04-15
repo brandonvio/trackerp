@@ -34,6 +34,7 @@ node {
     stage("APP"){
 
         dir ('app'){
+            sh "npm install"
             sh "npm run-script build"
             sh "aws s3 sync build/ s3://origin.trackerp.xyz --acl public-read"
             sh 'aws cloudfront create-invalidation --distribution-id E1FLKHXMXO0FKD --paths "/*"'

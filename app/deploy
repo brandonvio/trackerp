@@ -3,8 +3,7 @@ echo ##################### Package
 npm run-script build
 
 echo ##################### Deploy
-aws s3 sync build/ s3://origin.trackerp.xyz --acl public-read --profile dev1
+aws s3 sync build/ s3://origin.trackerp.xyz --acl public-read
 
 echo ##################### Cloudfront
-aws cloudfront create-invalidation --distribution-id E1FLKHXMXO0FKD --paths "/*"  --profile terransible
-
+aws cloudfront create-invalidation --distribution-id E1FLKHXMXO0FKD --paths "/*"
