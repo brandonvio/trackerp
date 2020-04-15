@@ -6,40 +6,28 @@ node {
            branch: "master"
         )
     }
-    stage('build'){
-        echo "Get env file."
-        sh "aws s3 ls"
-        sh "terraform --version"
 
-        dir('api'){
-            sh "zip -r package.zip *"
-            sh "cp package.zip ../terraform/api"
+    stage("API"){
+
+        stage('build'){
+            echo "Let's begin."
+            sh "aws s3 ls"
+            sh "terraform --version"
+
+            dir('api'){
+                sh "zip -r package.zip *"
+                sh "cp package.zip ../terraform/api"
+            }
         }
 
-        dir ('terraform/api'){
-            sh "pwd"
-            sh "ls"
-            sh "terraform init"
-            sh "terraform plan"
-        }
+        stage("deploy"){
 
-        dir ('terraform/app'){
-            sh "pwd"
-            sh "ls"
-            sh "terraform init"
-            sh "terraform plan"
+            dir ('terraform/api'){
+                sh "pwd"
+                sh "ls"
+                sh "terraform init"
+                sh "terraform plan"
+            }
         }
-        
-        // sh "cp /var/jenkins_home/secrets/env/env-rythm-api ."
-        // sh "mv env-rythm-api .env"
-        // sh "ls -al"
-        // echo "Get git rev-parse head."        
-        // git_head = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
-        // echo "Build docker image."
-        // sh "docker build -t matrixacr.azurecr.io/rythm-api:$env.BUILD_ID -f Dockerfile ."
-        // echo "Push new docker image to container repository."
-        // sh "docker push matrixacr.azurecr.io/rythm-api:$env.BUILD_ID"
-        // echo "Deploy to kubernetes cluster."
-        // sh "/usr/local/bin/kubectl set image deployments/rythm-api rythm-api=matrixacr.azurecr.io/rythm-api:$env.BUILD_ID --kubeconfig /var/jenkins_home/secrets/azure-k8-config"
     }
 }
