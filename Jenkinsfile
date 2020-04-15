@@ -6,9 +6,7 @@ node {
            branch: "master"
         )
     }
-
     stage("API"){
-
         stage('build'){
             echo "Let's begin."
             sh "aws s3 ls"
@@ -19,9 +17,7 @@ node {
                 sh "cp package.zip ../terraform/api"
             }
         }
-
         stage("deploy"){
-
             dir ('terraform/api'){
                 sh "pwd"
                 sh "ls"
@@ -30,9 +26,7 @@ node {
             }
         }
     }
-
     stage("APP"){
-
         stage('build'){
             dir ('app'){
                 sh "npm install"
@@ -41,7 +35,6 @@ node {
                 sh 'aws cloudfront create-invalidation --distribution-id E26NHRKWDSAWLX --paths "/*"'
             }
         }
-
         stage('deploy'){
             dir ('terraform/app'){
                 sh "pwd"
