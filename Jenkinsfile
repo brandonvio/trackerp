@@ -12,6 +12,7 @@ node {
         sh "terraform --version"
         sh "cd terraform/api"
         sh "pwd"
+        sh "ls"
         sh "terraform init"
         sh "terraform plan"
         // sh "cp /var/jenkins_home/secrets/env/env-rythm-api ."
