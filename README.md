@@ -24,7 +24,7 @@ Access the running application here:
 - Terraform - infrastructure as code
 - Jenkins - CI/CD
 
-![Architecture](https://raw.githubusercontent.com/brandonvio/trackerp/master/app/public/images/arch.png)
+![Architecture](https://raw.githubusercontent.com/brandonvio/trackerp/master/docs/arch.png)
 
 ![Alt text](https://raw.githubusercontent.com/brandonvio/purchase-tracker-ioc/master/docs/PurchaseTracker04.png "Workstation screenshot...")
 
