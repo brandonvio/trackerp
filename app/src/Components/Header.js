@@ -9,7 +9,8 @@ export const Header = () => {
         <p className="lead">
           Purchase tracking application.
           <br />
-          react + nodejs + lambda + dynamodb + api gateway + s3 + cloudfront + iac with terraform
+          react + nodejs + lambda + dynamodb + api gateway + s3 + cloudfront + iac with terraform +
+          ci/cd
         </p>
       </Container>
     </Jumbotron>
