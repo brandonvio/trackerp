@@ -1,6 +1,6 @@
 # trackerp
 
-Lightweight purchase tracking. Built with care on AWS, Lambda, DynamoDB and Terraform.
+Lightweight purchase tracking. Serverless. Built with care on AWS, Lambda, DynamoDB and Terraform.
 
 Access the running application here:  
 [trackerp](https://d2lq101g4g5eoi.cloudfront.net/)
@@ -9,7 +9,7 @@ Access the running application here:
 
 - React - front end framework
 - AWS S3 - static website hosting
-- AWS Route53 - domain hosting
+- AWS Route53 - dns service
 - AWS CloudFront - content distribution
 - AWS Certificate Manager - SSL certificate
 - Terraform - infrastructure as code
