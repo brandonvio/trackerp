@@ -1,5 +1,7 @@
 # trackerp
 
+[github repo](https://github.com/brandonvio/trackerp)
+
 Lightweight purchase tracking. Serverless. Built with care on AWS with Lambda, DynamoDB and Terraform.
 
 Access the running application here:  
